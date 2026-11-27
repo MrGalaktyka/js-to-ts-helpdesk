@@ -1,21 +1,21 @@
-import { gettickets,getlink,getfilename,setfilename,setlink } from '../script.js';
+import { gettickets,getlink,getfilename,setfilename,setlink } from '../script.ts';
 
 let tickets = gettickets();
 let link=getlink();
 let filename=getfilename();
 
 export function initExport(){
-    document.getElementById("exJSON").addEventListener("click", () => {
+    document.getElementById("exJSON")!.addEventListener("click", () => {
         event.preventDefault();
         exportJSON();
     });
 
-    document.getElementById("exCSV").addEventListener("click", () => {
+    document.getElementById("exCSV")!.addEventListener("click", () => {
         event.preventDefault();
         exportCSV();
     });
 
-    document.getElementById("exXML").addEventListener("click", () => {
+    document.getElementById("exXML")!.addEventListener("click", () => {
         event.preventDefault();
         exportXML();
     });

@@ -1,16 +1,16 @@
-import { getticketCounter, setticketCounter, gettickets, settickets } from '../script.js';
-import { saveToStorage, filter } from './listLogic.js';
+import { getticketCounter, setticketCounter, gettickets, settickets } from '../script.ts';
+import { saveToStorage, filter } from './listLogic.ts';
 
 export function initTicketLogic(){
     filter();
 
-    document.getElementById("ticketForm").addEventListener("submit", function(event) {
+    document.getElementById("ticketForm")!.addEventListener("submit", function(event) {
         event.preventDefault();
         addTicket();
         filter();
     });
 
-    document.getElementById("statusFilter").addEventListener("change", filter);
+    document.getElementById("statusFilter")!.addEventListener("change", filter);
 
     function dataSanitization(id, title, status, priority) {
         const messageEl = document.getElementById("message_add");
@@ -84,12 +84,16 @@ export function initTicketLogic(){
     function changeStatus()
     {
         const tickets = gettickets();
-        let ticketId = document.getElementById("ticketId").value;
-        let newStatus = document.getElementById("newStatus").value;
+        const ticketInputId = document.getElementById("ticketId") as HTMLInputElement;
+        const newStatusInput = document.getElementById("newStatus") as HTMLInputElement;
+        let ticketId = ticketInputId.value;
+        let newStatus = newStatusInput.value;
 
-        if (ticketId.trim() === "" || isNaN(ticketId))
+        const message_change = document.getElementById("message_change")!;
+
+        if (ticketId.trim() === "")
         {
-            document.getElementById("message_change").textContent = "Ticket ID must be a number.";
+            message_change.textContent = "Ticket ID can't be empty.";
             return;
         }
 
@@ -107,12 +111,12 @@ export function initTicketLogic(){
 
         if (!found)
         {
-            document.getElementById("message_change").textContent = "No ticket found with this ID.";
+            message_change.textContent = "No ticket found with this ID.";
             return;
         }
 
         saveToStorage();
-        document.getElementById("message_change").textContent = "Ticket status updated successfully.";
+        message_change.textContent = "Ticket status updated successfully.";
         filter();
     }
 
@@ -123,12 +127,12 @@ export function initTicketLogic(){
         filter();
     }
 
-    const resetId=document.getElementById('resetMemory');
+    const resetId=document.getElementById('resetMemory') as HTMLButtonElement;
     resetId.addEventListener("click", function(event) {
         resetMemory();
     });
 
-    const changeStatusId=document.getElementById('changeStatus');
+    const changeStatusId=document.getElementById('changeStatus') as HTMLButtonElement;
     changeStatusId.addEventListener("click", function(event) {
         changeStatus();
     });

@@ -1,5 +1,5 @@
 export function initSnowman(){
-    let img = document.getElementById("Snowman");
+    let img = document.getElementById("Snowman") as HTMLImageElement;
 
     function lightSnowman() 
     {

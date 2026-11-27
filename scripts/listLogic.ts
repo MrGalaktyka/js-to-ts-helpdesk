@@ -1,4 +1,4 @@
-import { gettickets, getticketCounter } from '../script.js';
+import { gettickets, getticketCounter } from '../script.ts';
 
 export function saveToStorage() {
     localStorage.setItem("tickets", JSON.stringify(gettickets()));
@@ -6,7 +6,7 @@ export function saveToStorage() {
 }
 
 export function filter() {
-    const statusFilterEl = document.getElementById("statusFilter");
+    const statusFilterEl = document.getElementById("statusFilter") as HTMLSelectElement;
     const value_filter = statusFilterEl ? statusFilterEl.value : "all";
     const list = document.getElementById("ticketList");
 
@@ -36,8 +36,8 @@ export function filter() {
     const visibleCountEl = document.getElementById("visibleCount");
     const totalCountEl = document.getElementById("totalCount");
 
-    if (visibleCountEl) visibleCountEl.textContent = visibleCount;
-    if (totalCountEl) totalCountEl.textContent = tickets.length;
+    if (visibleCountEl) visibleCountEl.textContent = visibleCount.toString();
+    if (totalCountEl) totalCountEl.textContent = tickets.length.toString();
 }
 
 export function createTicketRow(ticket) {

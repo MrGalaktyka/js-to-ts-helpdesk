@@ -1,10 +1,10 @@
-import { qbajzmibpbisqvoqavbqb, lisioImg, setQbajzmibpbisqvoqavbqb,getQbajzmibpbisqvoqavbqb } from '../script.js';
+import { qbajzmibpbisqvoqavbqb, lisioImg, setQbajzmibpbisqvoqavbqb,getQbajzmibpbisqvoqavbqb } from '../script.ts';
 
 export function initLisLogic(){
 
     // LisLogic
 
-    function createParticle(x, y) {
+    function createParticle(x: number, y: number) {
     const particle = document.createElement("img");
     particle.classList.add("particle");
     particle.src = "images/heart.png";
@@ -29,14 +29,18 @@ export function initLisLogic(){
         particle.remove();
     });
 
-    if(qbajzmibpbisqvoqavbqb==10) document.getElementById("backgroundMusic").src='./sounds/foxSounds/qbajzmibpbisqvoqavbqb.mp3';
+    if(qbajzmibpbisqvoqavbqb==10) {
+        const audio = document.getElementById("backgroundMusic") as HTMLAudioElement;
+        audio.src='./sounds/foxSounds/qbajzmibpbisqvoqavbqb.mp3';
+    } 
     setQbajzmibpbisqvoqavbqb(getQbajzmibpbisqvoqavbqb()+1);
     });
 
     lisioImg.addEventListener("contextmenu", function(event) {
         const foxSound=new Audio('./sounds/foxSounds/foxsound7.wav');
         foxSound.play();
-        document.getElementById("backgroundMusic").src='./sounds/music.mp3';
+        const audio = document.getElementById("backgroundMusic") as HTMLAudioElement;
+        audio.src='./sounds/music.mp3';
         
         setQbajzmibpbisqvoqavbqb(0);
         localStorage.setItem("qbajzmibpbisqvoqavbqb",0);
